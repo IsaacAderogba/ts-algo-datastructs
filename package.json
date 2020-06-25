@@ -1,0 +1,19 @@
+{
+  "name": "algo-datastructs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "del ./dist/*",
+    "build": "npm run clean && tsc",
+    "build:watch": "npm run clean && tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {}
+}
