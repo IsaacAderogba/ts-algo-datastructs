@@ -104,3 +104,51 @@ export function sameGuided(arr1: number[], arr2: number[]) {
  *
  * Very efficient for solving problems with minimal space complexity
  */
+
+/**
+ * Takes a sorted array of integers, and returns the first pair where sum is 0
+ */
+
+export function sumZero(arr: number[]) {
+  if (!arr.length) {
+    return;
+  }
+
+  // create pointer for start and for end
+  let startPointer = arr[0];
+  let endPointer = arr[arr.length - 1];
+  let halfwayPoint = Math.ceil(arr.length / 2);
+
+  // increment start pointer by 1, decrement end pointer by 1 until meet past middle
+  for (let i = 0; i < halfwayPoint; i++) {
+    const leftSide = arr[startPointer];
+    const rightSide = arr[endPointer];
+
+    if (leftSide + rightSide === 0) {
+      return [leftSide, rightSide];
+    }
+
+    startPointer++;
+    endPointer++;
+  }
+}
+
+/**
+ * Ahh, move one pointer, not both of them, so there's a condition
+ * to decide which pointer is the one that moves
+ */
+export function sumZeroGuided(arr: number[]) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    let sum = arr[left] + arr[right];
+    if (sum === 0) {
+      return [arr[left], arr[right]];
+    } else if (sum > 0) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+}
