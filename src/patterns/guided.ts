@@ -187,3 +187,33 @@ export function maxSubarraySum(arr: number[], num: number) {
 maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2); // 10
 maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4); // 10
 maxSubarraySum([], 4); // null
+
+/**
+ * Divide and Conquer Pattern
+ * ---
+ * Dividing a data set into smaller chunks and then repeating
+ * a process within that subset of data.
+ *
+ * Given a sorted array, return index where value passed to the function is located
+ */
+
+export function search(array: number[], val: number) {
+  let min = 0;
+  let max = array.length - 1;
+
+  while (min <= max) {
+    let middle = Math.floor((min + max) / 2);
+
+    if (array[middle] < val) {
+      min = middle + 1;
+    } else if (array[middle] > val) {
+      max = middle - 1;
+    } else {
+      return middle;
+    }
+  }
+  return -1;
+}
+
+console.log(search([1, 2, 3, 4, 5, 6], 4)); // 3
+console.log(search([1, 2, 3, 4, 5, 6], 11)); // -1
