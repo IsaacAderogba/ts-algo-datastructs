@@ -44,4 +44,17 @@ export function recursiveRange(num: number): number {
   return num + recursiveRange(num - 1);
 }
 
-console.log(recursiveRange(10));
+/**
+ * Write a recursive function called fib which accepts a number and
+ * returns the nth number in the Fibonacci sequence
+ */
+
+export function fib(num: number): number {
+  if (num <= 0 || num <= 2) {
+    return 1;
+  }
+
+  return fib(num - 1) + fib(num - 2);
+}
+
+console.log(fib(5));
