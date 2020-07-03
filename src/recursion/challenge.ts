@@ -16,3 +16,9 @@ export function power(base: number, exponent: number) {
 
 // console.log(power(2, 2)); // 4
 // console.log(power(2, 4)); // 16
+export function factorial(num: number): number {
+  if (num <= 1) return 1;
+  return num * factorial(num - 1);
+}
+
+// console.log(factorial(7)); // 5040
