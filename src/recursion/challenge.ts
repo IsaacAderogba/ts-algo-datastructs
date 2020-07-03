@@ -34,4 +34,14 @@ export function productOfArray(arr: number[]): number {
   return helper(count);
 }
 
-console.log(productOfArray([1, 2, 3, 10])); // 6
+/**
+ * Write a function called recursiveRange which accepts a number
+ * and adds up all the numbers from 0 to the number passed
+ */
+
+export function recursiveRange(num: number): number {
+  if (num <= 0) return 0;
+  return num + recursiveRange(num - 1);
+}
+
+console.log(recursiveRange(10));
