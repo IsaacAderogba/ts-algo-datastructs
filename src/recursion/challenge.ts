@@ -14,12 +14,29 @@ export function power(base: number, exponent: number) {
   return helper(count);
 }
 
+/**
+ * 
+function power(base, exponent){
+    if(exponent === 0) return 1;
+    return base * power(base,exponent-1);
+}
+
+ */
+
 // console.log(power(2, 2)); // 4
 // console.log(power(2, 4)); // 16
 export function factorial(num: number): number {
   if (num <= 1) return 1;
   return num * factorial(num - 1);
 }
+
+/**
+function factorial(x){
+   if (x < 0 ) return 0;
+   if (x <= 1 ) return 1;
+   return x * factorial(x-1);
+}
+ */
 
 // console.log(factorial(7)); // 5040
 
@@ -33,6 +50,15 @@ export function productOfArray(arr: number[]): number {
 
   return helper(count);
 }
+
+/**
+function productOfArray(arr) {
+    if(arr.length === 0) {
+        return 1;
+    }
+    return arr[0] * productOfArray(arr.slice(1));
+}
+ */
 
 /**
  * Write a function called recursiveRange which accepts a number
@@ -50,7 +76,7 @@ export function recursiveRange(num: number): number {
  */
 
 export function fib(num: number): number {
-  if (num <= 0 || num <= 2) {
+  if (num <= 2) {
     return 1;
   }
 
