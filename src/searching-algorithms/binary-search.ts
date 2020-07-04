@@ -6,10 +6,9 @@
 export function binarySearch<T>(array: T[], value: T) {
   let leftPtr = 0;
   let rightPtr = array.length - 1;
+  let middlePtr = Math.floor((leftPtr + rightPtr) / 2);
 
   while (leftPtr <= rightPtr) {
-    const middlePtr = Math.floor((leftPtr + rightPtr) / 2);
-
     if (array[middlePtr] === value) {
       return middlePtr;
     } else if (array[middlePtr] < value) {
@@ -17,6 +16,7 @@ export function binarySearch<T>(array: T[], value: T) {
     } else {
       rightPtr = middlePtr - 1;
     }
+    middlePtr = Math.floor((leftPtr + rightPtr) / 2);
   }
   return -1;
 }
