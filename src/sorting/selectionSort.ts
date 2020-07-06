@@ -1,16 +1,18 @@
-// pointer that goes up by 1
+/**
+ * Makes sense if we want to reduce the number of sorts for some reason
+ */
 
 function selectionSort(array: number[]) {
-  let min = 0;
   for (let i = 0; i < array.length - 1; i++) {
+    let min = i;
 
-    for (let j = i + 1; j < array.length; j++) {      
+    for (let j = i + 1; j < array.length; j++) {
       if (array[j] < array[min]) {
-        min = j
+        min = j;
       }
     }
 
-    if (array[min] < array[i]) {
+    if (min !== i) {
       let temp = array[i];
       array[i] = array[min];
       array[min] = temp;
@@ -20,4 +22,4 @@ function selectionSort(array: number[]) {
   return array;
 }
 
-console.log(selectionSort([5, 3, 4, 1, 2, 7, 2]))
+console.log(selectionSort([5, 3, 4, 1, 2, 7, 2]));
