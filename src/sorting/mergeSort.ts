@@ -91,4 +91,12 @@ function mergeSort(arr: number[]) {
   return arrays.pop();
 }
 
-console.log(mergeSort([5, 1, 29, 2, 45, 4, 13]));
+function mergeSort2(arr: number[]): number[] {
+  if (arr.length <= 1) return arr;
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort2(arr.slice(0, mid));
+  let right = mergeSort2(arr.slice(mid));
+  return merge(left, right);
+}
+
+console.log(mergeSort2([5, 1, 29, 2, 45, 4, 13]));
