@@ -6,6 +6,8 @@
  * Merging two sorted arrays is simples - jesus
  *
  * We need to write a function to merge two sorted arrays
+ * 0 (n log n) is the best (so merge sort is the best)
+ * Space complexity is not that great
  */
 
 /**
