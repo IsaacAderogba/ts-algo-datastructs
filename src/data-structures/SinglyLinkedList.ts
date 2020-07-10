@@ -19,8 +19,8 @@ class Node<T> {
 }
 
 class SinglyLinkedList<T> {
-  head: T | null;
-  tail: T | null;
+  head: Node<T> | null;
+  tail: Node<T> | null;
   length: number;
 
   constructor() {
@@ -29,6 +29,20 @@ class SinglyLinkedList<T> {
     this.length = 0;
   }
 
+  push(val: T) {
+    const newNode = new Node(val);
+
+    if (!this.head) {
+      this.head = newNode;
+    } else if (this.tail) {
+      this.tail.next = newNode;
+    }
+
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList<string>();
+list.push("hi");
