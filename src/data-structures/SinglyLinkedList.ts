@@ -18,4 +18,17 @@ class Node<T> {
   }
 }
 
+class SinglyLinkedList<T> {
+  head: T | null;
+  tail: T | null;
+  length: number;
 
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+}
+
+const list = new SinglyLinkedList<string>();
