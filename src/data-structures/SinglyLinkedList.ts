@@ -58,16 +58,36 @@ class SinglyLinkedList<T> {
     this.tail.next = null;
     this.length--;
 
+    this.resetHeadAndTailIfLengthIs0();
+    return newTail;
+  }
+
+  shift() {
+    if (!this.tail || !this.head) return undefined;
+
+    const oldHead = this.head;
+    this.head = this.head.next;
+
+    // decrement index, reset if equal 0
+    this.length--;
+    this.resetHeadAndTailIfLengthIs0();
+
+    // isolate old head in memory
+    oldHead.next = null;
+    return oldHead;
+  }
+
+  private resetHeadAndTailIfLengthIs0() {
     if (this.length === 0) {
       this.head = null;
       this.tail = null;
     }
-    return newTail;
   }
 }
 
 const list = new SinglyLinkedList<string>();
 list.push("hi");
-console.log(list.pop());
-console.log(list.pop());
+list.push("there");
+console.log(list.shift());
+console.log(list.shift());
 console.log(list);
