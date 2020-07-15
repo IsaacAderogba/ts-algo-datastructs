@@ -44,35 +44,30 @@ class SinglyLinkedList<T> {
   }
 
   pop() {
-    if (!this.tail || !this.head) return;
-    if (this.head === this.tail) {
-      const temp = this.head;
+    if (!this.tail || !this.head) return undefined;
+
+    let current = this.head;
+    let newTail = current;
+
+    while (current.next) {
+      newTail = current;
+      current = current.next;
+    }
+
+    this.tail = newTail;
+    this.tail.next = null;
+    this.length--;
+
+    if (this.length === 0) {
       this.head = null;
       this.tail = null;
-      this.length--;
-      return temp;
     }
-
-    let pre = this.head;
-    let isLast = this.head;
-
-    while (pre.next) {
-      isLast = pre;
-      pre = pre.next;
-    }
-
-    const nodeToReturn = isLast.next;
-    isLast.next = null;
-    this.tail = isLast;
-
-    this.length--;
-    return nodeToReturn;
+    return newTail;
   }
 }
 
 const list = new SinglyLinkedList<string>();
 list.push("hi");
-list.push("there");
 console.log(list.pop());
 console.log(list.pop());
 console.log(list);
