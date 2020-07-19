@@ -101,6 +101,14 @@ class SinglyLinkedList<T> {
     return currNode;
   }
 
+  set(value: T, index: number) {
+    const nodeToSet = this.get(index);
+    if (!nodeToSet) return false;
+
+    nodeToSet.val = value;
+    return true;
+  }
+
   private isIndexValidForTraversal(index: number) {
     return index < 0 || index >= this.length;
   }
