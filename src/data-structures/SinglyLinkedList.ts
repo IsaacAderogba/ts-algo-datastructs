@@ -1,13 +1,3 @@
-/**
- * Head
- * tail
- * length
- *
- * Node points to the next
- *
- * Use for insertion and deletion
- */
-
 class Node<T> {
   val: T;
   next: Node<T> | null;
@@ -90,7 +80,7 @@ class SinglyLinkedList<T> {
   }
 
   get(index: number) {
-    if (this.isIndexValidForTraversal(index)) return null;
+    if (index < 0 || index >= this.length) return null;
 
     let currNode = this.head;
 
@@ -101,7 +91,7 @@ class SinglyLinkedList<T> {
     return currNode;
   }
 
-  set(value: T, index: number) {
+  set(index: number, value: T) {
     const nodeToSet = this.get(index);
     if (!nodeToSet) return false;
 
@@ -109,8 +99,22 @@ class SinglyLinkedList<T> {
     return true;
   }
 
-  private isIndexValidForTraversal(index: number) {
-    return index < 0 || index >= this.length;
+  insert(index: number, value: T) {
+    if (index < 0 || index > this.length) return false;
+
+    if (index === 0) return !!this.unshift(value);
+    if (index === this.length) return !!this.push(value);
+
+    const newNode = new Node(value);
+    const preNode = this.get(index - 1);
+    const postNode = preNode?.next;
+
+    if (preNode && postNode) {
+      newNode.next = postNode;
+      preNode.next = newNode;
+    }
+
+    return true;
   }
 
   private decrementLengthAndResetIfNecessary() {
@@ -127,4 +131,4 @@ list.push("hi");
 list.push("there");
 list.unshift("new");
 list.unshift("entry");
-console.log(list.get(0));
+list.insert(1, "after");
