@@ -89,6 +89,22 @@ class SinglyLinkedList<T> {
     return this;
   }
 
+  get(index: number) {
+    if (this.isIndexValidForTraversal(index)) return null;
+
+    let currNode = this.head;
+
+    while (index--) {
+      if (currNode) currNode = currNode.next;
+    }
+
+    return currNode;
+  }
+
+  private isIndexValidForTraversal(index: number) {
+    return index < 0 || index >= this.length;
+  }
+
   private decrementLengthAndResetIfNecessary() {
     this.length--;
     if (this.length === 0) {
@@ -101,6 +117,6 @@ class SinglyLinkedList<T> {
 const list = new SinglyLinkedList<string>();
 list.push("hi");
 list.push("there");
-console.log(list.unshift("new"));
-console.log(list.unshift("entry"));
-console.log(list);
+list.unshift("new");
+list.unshift("entry");
+console.log(list.get(0));
