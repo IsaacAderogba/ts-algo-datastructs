@@ -56,9 +56,8 @@ class SinglyLinkedList<T> {
 
     this.tail = newTail;
     this.tail.next = null;
-    this.length--;
 
-    this.resetHeadAndTailIfLengthIs0();
+    this.decrementLengthAndResetIfNecessary();
     return newTail;
   }
 
@@ -68,16 +67,30 @@ class SinglyLinkedList<T> {
     const oldHead = this.head;
     this.head = this.head.next;
 
-    // decrement index, reset if equal 0
-    this.length--;
-    this.resetHeadAndTailIfLengthIs0();
+    this.decrementLengthAndResetIfNecessary();
 
     // isolate old head in memory
     oldHead.next = null;
     return oldHead;
   }
 
-  private resetHeadAndTailIfLengthIs0() {
+  unshift(val: T) {
+    const newNode = new Node(val);
+
+    if (!this.head) {
+      this.tail = newNode;
+      this.head = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  private decrementLengthAndResetIfNecessary() {
+    this.length--;
     if (this.length === 0) {
       this.head = null;
       this.tail = null;
@@ -88,6 +101,6 @@ class SinglyLinkedList<T> {
 const list = new SinglyLinkedList<string>();
 list.push("hi");
 list.push("there");
-console.log(list.shift());
-console.log(list.shift());
+console.log(list.unshift("new"));
+console.log(list.unshift("entry"));
 console.log(list);
