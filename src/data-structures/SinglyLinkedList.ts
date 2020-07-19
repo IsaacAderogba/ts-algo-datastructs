@@ -48,7 +48,7 @@ class SinglyLinkedList<T> {
     this.tail.next = null;
 
     this.decrementLengthAndResetIfNecessary();
-    return newTail;
+    return current;
   }
 
   shift() {
@@ -117,6 +117,25 @@ class SinglyLinkedList<T> {
     return true;
   }
 
+  remove(index: number) {
+    if (index < 0 || index > this.length) return undefined;
+
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    // take the previous one's next and set to deleted ones next
+    const preNode = this.get(index - 1);
+    const nodeToRemove = preNode?.next;
+
+    if (preNode && nodeToRemove) {
+      preNode.next = nodeToRemove.next;
+      nodeToRemove.next = null;
+      this.decrementLengthAndResetIfNecessary();
+    }
+
+    return nodeToRemove;
+  }
+
   private decrementLengthAndResetIfNecessary() {
     this.length--;
     if (this.length === 0) {
@@ -131,4 +150,4 @@ list.push("hi");
 list.push("there");
 list.unshift("new");
 list.unshift("entry");
-list.insert(1, "after");
+
