@@ -136,6 +136,32 @@ class SinglyLinkedList<T> {
     return nodeToRemove;
   }
 
+  reverse() {
+    let currentNode = this.head;
+    this.tail = currentNode;
+
+    // 27
+    let nextNode = currentNode?.next;
+
+    while (nextNode) {
+      // temp node is 32
+      const tempNode = nextNode.next;
+
+      // 27 is pointing to 13
+      nextNode.next = currentNode;
+
+      // current node is now 27
+      currentNode = nextNode;
+
+      // 32
+      if (!tempNode) this.head = nextNode;
+      nextNode = tempNode;
+    }
+
+    if (this.tail) this.tail.next = null;
+    return list;
+  }
+
   private decrementLengthAndResetIfNecessary() {
     this.length--;
     if (this.length === 0) {
@@ -145,9 +171,9 @@ class SinglyLinkedList<T> {
   }
 }
 
-const list = new SinglyLinkedList<string>();
-list.push("hi");
-list.push("there");
-list.unshift("new");
-list.unshift("entry");
-
+const list = new SinglyLinkedList<number>();
+list.push(13);
+list.push(27);
+list.push(32);
+list.push(71);
+console.log(list.reverse());
