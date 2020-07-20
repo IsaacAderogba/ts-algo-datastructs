@@ -1,3 +1,5 @@
+export {}
+
 class Node<T> {
   val: T;
   next: Node<T> | null;
@@ -159,7 +161,7 @@ class SinglyLinkedList<T> {
     }
 
     if (this.tail) this.tail.next = null;
-    return list;
+    return this;
   }
 
   private decrementLengthAndResetIfNecessary() {
