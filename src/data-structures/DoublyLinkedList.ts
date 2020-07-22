@@ -24,21 +24,76 @@ class DoublyLinkedList<T> {
   push(value: T) {
     const newNode = new Node(value);
 
-    if (!this.head && !this.tail) {
+    if (this.isListEmpty()) {
       this.head = newNode;
       this.tail = this.head;
-    } else if(this.tail) {
+    } else if (this.tail) {
       this.tail.next = newNode;
       newNode.prev = this.tail;
       this.tail = newNode;
     }
 
-    this.length++;
+    this.incrementLength();
     return this;
+  }
+
+  pop() {
+    if (this.isListEmpty()) return undefined;
+
+    let poppedNode = this.tail;
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else if (poppedNode) {
+      this.tail = poppedNode.prev;
+      poppedNode.prev = null;
+      if (this.tail) this.tail.next = null;
+    }
+
+    this.decrementLength();
+    return poppedNode;
+  }
+
+  shift() {
+    if (this.isListEmpty()) return undefined;
+
+    let oldHead: Node<T> | null = null;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else if (this.head) {
+      oldHead = this.head;
+      this.head = this.head.next;
+
+      if (this.head) {
+        this.head.prev = null;
+      }
+      oldHead.next = null;
+    }
+
+    this.decrementLength();
+    return oldHead;
+  }
+
+  private isListEmpty() {
+    if (!this.head && !this.tail) return true;
+    return false;
+  }
+
+  private incrementLength() {
+    this.length++;
+  }
+
+  private decrementLength() {
+    this.length--;
   }
 }
 
-const list = new DoublyLinkedList();
+const list = new DoublyLinkedList<number>();
 
-console.log(list.push(1));
-console.log(list.push(2));
+list.push(1);
+console.log(list.shift());
+console.log(list.shift());
+// console.log(list.pop());
+// console.log(list);
