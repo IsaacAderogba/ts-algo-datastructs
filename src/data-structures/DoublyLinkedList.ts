@@ -76,6 +76,22 @@ class DoublyLinkedList<T> {
     return oldHead;
   }
 
+  unshift(val: T) {
+    const newNode = new Node(val);
+
+    if (!this.length) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else if (this.head) {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
+    }
+
+    this.incrementLength;
+    return this;
+  }
+
   private isListEmpty() {
     if (!this.head && !this.tail) return true;
     return false;
@@ -93,7 +109,6 @@ class DoublyLinkedList<T> {
 const list = new DoublyLinkedList<number>();
 
 list.push(1);
-console.log(list.shift());
-console.log(list.shift());
+console.log(list.unshift(2));
 // console.log(list.pop());
 // console.log(list);
