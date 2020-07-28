@@ -24,7 +24,7 @@ class DoublyLinkedList<T> {
   push(value: T) {
     const newNode = new Node(value);
 
-    if (this.isListEmpty()) {
+    if (this.isListEmpty) {
       this.head = newNode;
       this.tail = this.head;
     } else if (this.tail) {
@@ -38,7 +38,7 @@ class DoublyLinkedList<T> {
   }
 
   pop() {
-    if (this.isListEmpty()) return undefined;
+    if (this.isListEmpty) return undefined;
 
     let poppedNode = this.tail;
 
@@ -56,7 +56,7 @@ class DoublyLinkedList<T> {
   }
 
   shift() {
-    if (this.isListEmpty()) return undefined;
+    if (this.isListEmpty) return undefined;
 
     let oldHead: Node<T> | null = null;
     if (this.length === 1) {
@@ -92,7 +92,31 @@ class DoublyLinkedList<T> {
     return this;
   }
 
-  private isListEmpty() {
+  get(index: number) {
+    if (this.isListEmpty) return null;
+    if (index < 0 || index > this.length - 1) return null;
+
+    let nodeToReturn: Node<T> | null = null;
+    if (index > this.length / 2) {
+      nodeToReturn = this.tail;
+      for (let i = this.length - 1; i > index; i--) {
+        if (nodeToReturn) {
+          nodeToReturn = nodeToReturn.prev;
+        }
+      }
+    } else {
+      nodeToReturn = this.head;
+      for (let i = 0; i < index; i++) {
+        if (nodeToReturn) {
+          nodeToReturn = nodeToReturn.next;
+        }
+      }
+    }
+
+    return nodeToReturn;
+  }
+
+  private get isListEmpty() {
     if (!this.head && !this.tail) return true;
     return false;
   }
@@ -109,6 +133,10 @@ class DoublyLinkedList<T> {
 const list = new DoublyLinkedList<number>();
 
 list.push(1);
-console.log(list.unshift(2));
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+console.log(list.get(0));
 // console.log(list.pop());
 // console.log(list);
