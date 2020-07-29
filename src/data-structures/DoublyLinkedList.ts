@@ -194,3 +194,10 @@ list.push(5);
 console.log(list.remove(1));
 // console.log(list.pop());
 // console.log(list);
+
+/**
+ * Insertion is constant time 0(1)
+ * Removal for double is always constant 0(1)
+ * Searching is 0(N), even though it's technically 0(N/2) because of divide and conquer approach
+ * Access is 0(N)
+ */
