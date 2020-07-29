@@ -119,8 +119,28 @@ class DoublyLinkedList<T> {
   set(index: number, value: T) {
     const foundNode = this.get(index);
     if (foundNode) {
-      foundNode.val = value
+      foundNode.val = value;
     }
+    return !!foundNode;
+  }
+
+  insert(index: number, value: T) {
+    if (index === 0) !!this.unshift(value);
+    if (index === this.length) !!this.push(value);
+
+    const newNode = new Node(value);
+    const foundNode = this.get(index);
+
+    if (foundNode) {
+      newNode.next = foundNode;
+      newNode.prev = foundNode.prev;
+      if (foundNode.prev) {
+        foundNode.prev.next = newNode;
+        foundNode.prev = newNode;
+      }
+    }
+
+    this.incrementLength();
     return !!foundNode;
   }
 
@@ -145,7 +165,6 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-console.log(list.set(0, 10));
-console.log(list);
+console.log(list.insert(1, 10));
 // console.log(list.pop());
 // console.log(list);
