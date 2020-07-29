@@ -94,7 +94,7 @@ class DoublyLinkedList<T> {
 
   get(index: number) {
     if (this.isListEmpty) return null;
-    if (index < 0 || index > this.length - 1) return null;
+    if (index < 0 || index >= this.length) return null;
 
     let nodeToReturn: Node<T> | null = null;
     if (index > this.length / 2) {
@@ -114,6 +114,14 @@ class DoublyLinkedList<T> {
     }
 
     return nodeToReturn;
+  }
+
+  set(index: number, value: T) {
+    const foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = value
+    }
+    return !!foundNode;
   }
 
   private get isListEmpty() {
@@ -137,6 +145,7 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-console.log(list.get(0));
+console.log(list.set(0, 10));
+console.log(list);
 // console.log(list.pop());
 // console.log(list);
