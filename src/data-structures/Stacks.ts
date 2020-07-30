@@ -34,8 +34,7 @@ class Stack<T> {
       this.first = newNode;
     }
 
-    this.size++;
-    return this.size;
+    return ++this.size;
   }
 
   pop() {
