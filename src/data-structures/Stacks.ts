@@ -7,9 +7,8 @@
  */
 
 class Node<T> {
-  constructor(public value: T, public next: Node<T> | null) {
+  constructor(public value: T, public next: Node<T> | null = null) {
     this.value = value;
-    this.next = null;
   }
 }
 
@@ -23,4 +22,49 @@ class Stack<T> {
     this.last = null;
     this.size = 0;
   }
+
+  push(value: T) {
+    const newNode = new Node(value);
+
+    if (this.size === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      newNode.next = this.first;
+      this.first = newNode;
+    }
+
+    this.size++;
+    return this.size;
+  }
+
+  pop() {
+    if (!this.size) return;
+
+    const poppedNode = this.first;
+
+    if (this.first && poppedNode) {
+      this.first = poppedNode.next;
+      poppedNode.next = null;
+    }
+
+    this.size--;
+
+    if (this.size === 0) {
+      this.first = null;
+      this.last = null;
+    }
+
+    return poppedNode;
+  }
 }
+
+const stack = new Stack<number>();
+
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.pop();
+stack.pop();
+stack.pop();
+console.log(stack);
