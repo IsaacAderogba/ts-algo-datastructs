@@ -38,8 +38,6 @@ export class BinarySearchTree<T> {
   root: Node<T> | null = null;
 
   insert(value: T) {
-    // is there a node to the left, if not put it there
-    // otherwise traverse that also
     const newNode = new Node(value);
     if (!this.root) {
       this.root = newNode;
@@ -69,6 +67,33 @@ export class BinarySearchTree<T> {
 
     return this;
   }
+
+  find(value: T) {
+    if (!this.root) return undefined;
+
+    let traversingNode = this.root;
+    let foundNode: Node<T> | null = null;
+
+    while (!foundNode) {
+      if (traversingNode.value === value) {
+        foundNode = traversingNode;
+      } else if (value > traversingNode.value) {
+        if (traversingNode.right) {
+          traversingNode = traversingNode.right;
+        } else {
+          break; // not found
+        }
+      } else {
+        if (traversingNode.left) {
+          traversingNode = traversingNode.left;
+        } else {
+          break; // not found
+        }
+      }
+    }
+
+    return foundNode;
+  }
 }
 
 const tree = new BinarySearchTree<number>();
@@ -78,4 +103,4 @@ tree.insert(7);
 tree.insert(4);
 tree.insert(9);
 tree.insert(6);
-console.log(tree.root);
+console.log(tree.find(2));
