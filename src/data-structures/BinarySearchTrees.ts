@@ -124,14 +124,15 @@ export class BinarySearchTree<T> {
     return visitedQueue;
   }
 
-  dfsPreOrder() {
+  dfs(order: "pre" | "post" = "pre") {
     if (!this.root) return;
 
     const visitedQueue = new Queue<Node<T>>();
     function traverse(node: Node<T>) {
-      visitedQueue.enqueue(node);
+      if (order === "pre") visitedQueue.enqueue(node);
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
+      if (order === "post") visitedQueue.enqueue(node);
     }
 
     traverse(this.root);
@@ -146,4 +147,4 @@ tree.insert(15);
 tree.insert(3);
 tree.insert(8);
 tree.insert(20);
-console.log(tree.dfsPreOrder());
+console.log(tree.dfs());
