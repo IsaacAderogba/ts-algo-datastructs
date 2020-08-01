@@ -22,8 +22,9 @@
  * - BSTs are special cases, that are sorted in a particular way
  *    - Used for when there's a way to compare things (some bigger, some less)
  *    - Search and Insertion become very quick (allows divide and conquer)
- *
- * How to traverse the tree? Visit every node one time?
+ * 
+ * Use inOrder if you want sorted
+ * Use preOrder if you want to reconstruct it
  */
 
 import { Queue } from "./Queues";
