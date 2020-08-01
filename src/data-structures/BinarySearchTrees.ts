@@ -109,7 +109,6 @@ export class BinarySearchTree<T> {
 
     const todoQueue = new Queue<Node<T>>();
     const visitedQueue = new Queue<Node<T>>();
-
     todoQueue.enqueue(this.root);
 
     while (todoQueue.size !== 0) {
@@ -124,13 +123,27 @@ export class BinarySearchTree<T> {
 
     return visitedQueue;
   }
+
+  dfsPreOrder() {
+    if (!this.root) return;
+
+    const visitedQueue = new Queue<Node<T>>();
+    function traverse(node: Node<T>) {
+      visitedQueue.enqueue(node);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+
+    traverse(this.root);
+    return visitedQueue;
+  }
 }
 
 const tree = new BinarySearchTree<number>();
-tree.insert(5);
-tree.insert(3);
-tree.insert(7);
-tree.insert(4);
-tree.insert(9);
+tree.insert(10);
 tree.insert(6);
-console.log(tree.bfs());
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+console.log(tree.dfsPreOrder());
