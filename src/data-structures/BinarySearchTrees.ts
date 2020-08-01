@@ -22,7 +22,11 @@
  * - BSTs are special cases, that are sorted in a particular way
  *    - Used for when there's a way to compare things (some bigger, some less)
  *    - Search and Insertion become very quick (allows divide and conquer)
+ *
+ * How to traverse the tree? Visit every node one time?
  */
+
+import { Queue } from "./Queues";
 
 export class Node<T> {
   value: T;
@@ -69,7 +73,7 @@ export class BinarySearchTree<T> {
   }
 
   find(value: T) {
-    if (!this.root) return undefined;
+    if (!this.root) return null;
 
     let traversingNode = this.root;
     let foundNode: Node<T> | null = null;
@@ -94,6 +98,32 @@ export class BinarySearchTree<T> {
 
     return foundNode;
   }
+
+  /**
+   * Like a 1:2 ratio
+   * For every node with dequeue from the todoQueue, there can potentially be two more added
+   * And it's breadth-first because it's really just first-in first-out
+   */
+  bfs() {
+    if (!this.root) return;
+
+    const todoQueue = new Queue<Node<T>>();
+    const visitedQueue = new Queue<Node<T>>();
+
+    todoQueue.enqueue(this.root);
+
+    while (todoQueue.size !== 0) {
+      const dequeuedNode = todoQueue.dequeue()?.value;
+
+      if (dequeuedNode) {
+        visitedQueue.enqueue(dequeuedNode);
+        if (dequeuedNode.left) todoQueue.enqueue(dequeuedNode.left);
+        if (dequeuedNode.right) todoQueue.enqueue(dequeuedNode.right);
+      }
+    }
+
+    return visitedQueue;
+  }
 }
 
 const tree = new BinarySearchTree<number>();
@@ -103,4 +133,4 @@ tree.insert(7);
 tree.insert(4);
 tree.insert(9);
 tree.insert(6);
-console.log(tree.find(2));
+console.log(tree.bfs());

@@ -14,7 +14,7 @@ class Node<T> {
   }
 }
 
-class Queue<T> {
+export class Queue<T> {
   first: Node<T> | null;
   last: Node<T> | null;
   size: number;
@@ -66,4 +66,3 @@ queue.enqueue(2);
 queue.dequeue();
 queue.dequeue();
 queue.dequeue();
-console.log(queue);
